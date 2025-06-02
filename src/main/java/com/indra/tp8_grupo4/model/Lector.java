@@ -1,8 +1,10 @@
-package com.indra.tp8.model;
+package com.indra.tp8_grupo4.model;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import com.indra.tp8_grupo4.model.Libro.TipoLibro;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -11,16 +13,22 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 public class Lector {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
-	// REVISAR ESTO CUIDAO AAA
 	private Long nSocio;
+	
 
 	private String nombre;
 	private String telefono;

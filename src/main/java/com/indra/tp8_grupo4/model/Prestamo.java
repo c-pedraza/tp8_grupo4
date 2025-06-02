@@ -1,14 +1,13 @@
-package com.indra.tp8.model;
+package com.indra.tp8_grupo4.model;
 
 import java.util.Date;
-import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,19 +18,21 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-public class Autor {
-
+public class Prestamo {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nombre;
+	private Date fechaInicio;
+	private Date fechaFin;
 	
-	private String nacionalidad;
+	@ManyToOne
+	@JoinColumn(name = "copia_id")
+	private Copia copia;
 	
-	private Date fechaNacimiento;
-	
-	//Un solo autor tiene MUCHOS libros
-	@OneToMany(mappedBy="libros", cascade = CascadeType.ALL)
-	List<Libro> libros;
+	@ManyToOne
+	@JoinColumn(name = "lector_id")
+	private Lector lector;
+
 }

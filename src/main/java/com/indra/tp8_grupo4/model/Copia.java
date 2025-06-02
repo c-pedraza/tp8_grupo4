@@ -1,4 +1,4 @@
-package com.indra.tp8.model;
+package com.indra.tp8_grupo4.model;
 
 import java.util.List;
 
@@ -45,7 +45,4 @@ public class Copia {
 	// IGUAL ES MANYTOONE AAAAAAAA
 	@OneToMany(mappedBy = "copia", cascade = CascadeType.ALL)
 	private List<Prestamo> prestamos;
-
-	// Maybe algo para relacionarlo con el lector?
-
 }

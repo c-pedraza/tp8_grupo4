@@ -1,4 +1,4 @@
-package com.indra.tp8.model;
+package com.indra.tp8_grupo4.model;
 
 import java.util.List;
 
