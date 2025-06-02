@@ -1,10 +1,10 @@
-package com.indra.tp8.repository;
+package com.indra.tp8_grupo4.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.indra.tp8.model.Lector;
+import com.indra.tp8_grupo4.model.Lector;
 
 public interface LectorRepository extends JpaRepository<Lector, Long> {
 
