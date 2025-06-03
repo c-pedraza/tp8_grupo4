@@ -37,9 +37,9 @@ public class Copia {
 	@Enumerated(EnumType.STRING)
 	private EstadoCopia estado;
 
-	// Muchas copias para un solo libro
-	@ManyToOne
-	private Libro libro;
+//	// Muchas copias para un solo libro
+//	@ManyToOne
+//	private Libro libro;
 
 	// UNA copia para MUCHOS prestamos
 	// IGUAL ES MANYTOONE AAAAAAAA

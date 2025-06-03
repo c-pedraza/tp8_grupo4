@@ -45,8 +45,8 @@ public class Libro {
 	private Autor autor;
 	
 	//UN libro puede tener MUCHAS copias
-	@OneToMany(mappedBy = "libro", cascade = CascadeType.ALL)
-	private List<Copia> copias;
+//	@OneToMany(mappedBy = "libro", cascade = CascadeType.ALL)
+//	private List<Copia> copias;
 	
 	//Estado del libro equivalente al enum del estado de las copias
 	private String estado;
