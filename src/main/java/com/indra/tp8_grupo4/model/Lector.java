@@ -43,7 +43,7 @@ public class Lector {
 	private Multa multa;
 
 	// FALTA HACER LOS MÉTODOS
-	public void devolver(Long idPrestamo, Date fechaAct) {
+	public void devolver(long idPrestamo, Date fechaAct) {
 
 		// Obtenemos el prestamo con su id
 		Optional<Prestamo> prestamo = prestamos.stream().filter(p -> p.getId().equals(idPrestamo)).findFirst();
@@ -61,34 +61,38 @@ public class Lector {
 
 	}
 
-	public boolean prestar(Long id, Date fechaAct) {
+	public Prestamo prestar(long id, Date fechaAct) {
 
 		// Se ha acabado la multa
-		if (multa != null) {
-			if (fechaAct.compareTo(multa.getFechaFin()) < 0) {
-				// Se puede pedir prestado un libro
-				return false;
+		if (this.multa != null) {
+			if (fechaAct.compareTo(this.multa.getFechaFin()) < 0) {
+				// No se puede pedir prestado un libro
+				return null;
+			} else {
+				this.multa = null;
 			}
-		}
+		} 
 
 		// Tiene más de 3 prestados
 		if (prestamos.size() > 3) {
-			return false;
+			return null;
 		}
 
 		// Creamos el prestamo
-		Date hoy = new Date();
-		int mes = this.multa.getFechaFin().getDate() + 30;
-		Date finFecha = this.multa.getFechaFin();
-
-		finFecha.setDate(mes);
-
 		Prestamo prestamo = new Prestamo();
+		
+		Date hoy = new Date();
+		Date finFecha = new Date();
+		int fechaFin_dias = hoy.getDate() + 30;
+
+		finFecha.setDate(fechaFin_dias);
+
 		prestamo.setFechaInicio(hoy);
 		prestamo.setFechaFin(finFecha);
+		
 		prestamos.add(prestamo);
 
-		return true;
+		return prestamo;
 	}
 
 	public void multar(int dias) {
