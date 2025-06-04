@@ -50,4 +50,11 @@ public class PrestamoController {
 	public void delete(@PathVariable long id1) {
 		servicio.delete(id1);
 	}
+	
+	// Prestar copia a un lector
+	@PutMapping(path = "/prestarCopia/{idCopia}/{idLector}") //http://localhost:8080/prestamos/prestarCopia/1/Antonio
+	public boolean prestarCopia(@PathVariable long idCopia, @PathVariable long idLector) {
+		servicio.prestarCopia(idCopia, idLector);
+		return true;
+	}
 }
