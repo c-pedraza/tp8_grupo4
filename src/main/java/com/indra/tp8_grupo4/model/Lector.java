@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.indra.tp8_grupo4.model.Libro.TipoLibro;
 
 import jakarta.persistence.CascadeType;
@@ -36,6 +37,7 @@ public class Lector {
 
 	// Un lector tiene MUCHOS prestamos
 	@OneToMany(mappedBy = "lector", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Prestamo> prestamos;
 
 	// Cada persona tiene una sola multa
@@ -46,7 +48,7 @@ public class Lector {
 	public void devolver(long idPrestamo, Date fechaAct) {
 
 		// Obtenemos el prestamo con su id
-		Optional<Prestamo> prestamo = prestamos.stream().filter(p -> p.getId().equals(idPrestamo)).findFirst();
+		Optional<Prestamo> prestamo = this.prestamos.stream().filter(p -> p.getId().equals(idPrestamo)).findFirst();
 
 		if (prestamo.isPresent()) {
 			// Máximo 30 días prestado Si hay días de retraso multa(dias)
@@ -56,7 +58,7 @@ public class Lector {
 			}
 
 			// Prestado - 1
-			prestamos.remove(prestamo.get());
+			this.prestamos.remove(prestamo.get());
 		}
 
 	}
@@ -71,10 +73,10 @@ public class Lector {
 			} else {
 				this.multa = null;
 			}
-		} 
+		}
 
 		// Tiene más de 3 prestados
-		if (prestamos.size() > 3) {
+		if (this.prestamos.size() >= 3) {
 			return null;
 		}
 
@@ -89,8 +91,6 @@ public class Lector {
 
 		prestamo.setFechaInicio(hoy);
 		prestamo.setFechaFin(finFecha);
-		
-		prestamos.add(prestamo);
 
 		return prestamo;
 	}

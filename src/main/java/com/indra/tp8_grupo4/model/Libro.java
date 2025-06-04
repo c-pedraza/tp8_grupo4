@@ -2,6 +2,8 @@ package com.indra.tp8_grupo4.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -45,8 +47,9 @@ public class Libro {
 	private Autor autor;
 	
 	//UN libro puede tener MUCHAS copias
-//	@OneToMany(mappedBy = "libro", cascade = CascadeType.ALL)
-//	private List<Copia> copias;
+	@OneToMany(mappedBy = "libro", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Copia> copias;
 	
 	//Estado del libro equivalente al enum del estado de las copias
 	private String estado;

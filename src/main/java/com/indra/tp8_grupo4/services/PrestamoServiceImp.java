@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.indra.tp8_grupo4.model.Copia;
+import com.indra.tp8_grupo4.model.Copia.EstadoCopia;
 import com.indra.tp8_grupo4.model.Lector;
 import com.indra.tp8_grupo4.model.Prestamo;
 import com.indra.tp8_grupo4.repository.PrestamoRepository;
@@ -84,8 +85,12 @@ public class PrestamoServiceImp implements PrestamoService {
 		listaPrestamos.add(prestamo);
 		lector.setPrestamos(listaPrestamos);
 		
+		// Cambiamos el estado de la copia a PRESTADO
+		copia.setEstado(EstadoCopia.PRESTADO);
+		
 		// Modificamos a la base de datos
 		lectorService.modificar(lector);
+		copiaService.modificar(copia);
 		
 	}
 

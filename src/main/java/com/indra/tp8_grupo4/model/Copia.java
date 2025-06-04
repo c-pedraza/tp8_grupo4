@@ -2,6 +2,8 @@ package com.indra.tp8_grupo4.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -38,11 +40,12 @@ public class Copia {
 	private EstadoCopia estado;
 
 //	// Muchas copias para un solo libro
-//	@ManyToOne
-//	private Libro libro;
+	@ManyToOne
+	private Libro libro;
 
 	// UNA copia para MUCHOS prestamos
 	// IGUAL ES MANYTOONE AAAAAAAA
 	@OneToMany(mappedBy = "copia", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Prestamo> prestamos;
 }
